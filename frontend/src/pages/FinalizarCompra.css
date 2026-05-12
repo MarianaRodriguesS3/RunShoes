@@ -1,0 +1,96 @@
+/* CONTAINER */
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 25px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.painel{
+  border:1px solid #ddd;
+  padding:20px;
+  border-radius:6px;
+  margin-bottom:20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* FORM */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.form input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tabs h3 {
+  width: 100%;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  background: #f5f5f5;
+  transition: 0.2s;
+}
+
+.tabs button:hover {
+  background: #e0e0e0;
+}
+
+.tabs button.selecionado {
+  background: #022307;
+  color: white;
+  border-color: #011121;
+}
+
+/* WRAPPER PARA ALINHAR BOTÃO À DIREITA */
+.finalizar-btn-wrapper {
+  display: flex;
+  justify-content: flex-end; /* botão alinhado à direita */
+  margin-top: 10px;
+}
+
+/* Estilo base para todas as mensagens */
+.mensagem {
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Mensagem de erro */
+.mensagem.vermelho {
+  color: red; /* Apenas a cor do texto */
+}
+
+/* Mensagem de sucesso */
+.mensagem.verde {
+  color: green; /* Apenas a cor do texto */
+}
+
+.endereco-grid {
+  display: grid;
+  grid-template-columns: 120px 70px 1fr;
+  gap: 10px;
+}

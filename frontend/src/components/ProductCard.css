@@ -1,0 +1,152 @@
+/* Container da lista de produtos */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Card do produto */
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #fff;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px #7cb58a;
+}
+
+/* Imagem do produto */
+.product-image img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Informações do produto */
+.product-info {
+  padding: 15px;
+}
+
+.product-info h3 {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+  color: #022307;
+}
+
+.product-info p {
+  margin: 0 0 5px;
+  font-size: 0.9rem;
+  color: #022307;
+}
+
+.product-info .price {
+  font-weight: bold;
+  color: #1a8917;
+}
+
+.size-carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Botões de tamanho */
+.size-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #022307 !important;
+  color: #022307;
+  background-color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.size-btn:hover {
+  border-color: #022307;
+  color: white;
+  background-color: #022307;
+  transform: scale(1.08);
+}
+
+.size-btn.selected {
+  background-color: #022307!important;
+  color: white;
+  border-color: #022307;
+}
+
+/* Erro tamanho */
+.product-info .size-error {
+  color: #d32f2f;
+  font-size: 14px;
+  margin-top: 6px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Container dos botões */
+.product-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  border-top: 1px solid #eee;
+}
+
+/* Botões */
+.product-actions button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.product-actions button:active {
+  transform: scale(0.96);
+}
+
+/* Botão Carrinho */
+.btn-cart {
+  background-color: #022307;
+  color: #fff;
+}
+
+.btn-cart:hover {
+  background-color: #041508;
+}
+
+/* Botão Comprar */
+.btn-buy {
+  background-color: #fff;
+  color: #022307;
+  border: 1px solid #022307 !important;
+  transition: all 0.3s ease;
+}
+
+.btn-buy:hover {
+  color: #041508;
+  border: 1px solid #022307;
+  box-shadow: 0 6px 20px rgba(2, 35, 7, 0.3);
+  background: rgba(180, 230, 190, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(12px);
+}
