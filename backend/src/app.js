@@ -9,7 +9,8 @@ const app = express();
 const corsOptions = {
   origin: [
     "https://marianarodriguess3.github.io",
-    "https://marianarodriguess3.github.io/RunShoes"
+    "https://marianarodriguess3.github.io/RunShoes",
+    "http://localhost:5173"
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,

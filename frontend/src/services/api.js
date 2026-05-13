@@ -1,7 +1,7 @@
 import axios from "axios";
 
+// Cria a instância do axios
 const api = axios.create({
-  // URL do seu backend no Render
   baseURL: "https://runshoes-backend.onrender.com/api",
 });
 
@@ -21,14 +21,13 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem("token");
       localStorage.removeItem("usuario");
-      
-      // Ajustado para o caminho do GitHub Pages
       window.location.href = "/RunShoes/login"; 
     }
     return Promise.reject(error);
   }
 );
 
+// Função nomeada para buscar usuário logado
 export const getUsuarioLogado = async () => {
   try {
     const res = await api.get("/usuario/dados-usuario");
@@ -39,4 +38,16 @@ export const getUsuarioLogado = async () => {
   }
 };
 
+// Função nomeada para buscar produtos (opcional)
+export const getProdutos = async () => {
+  try {
+    const res = await api.get("/products");
+    return res.data;
+  } catch (err) {
+    console.error("Erro ao buscar produtos:", err);
+    return [];
+  }
+};
+
+// **Export default no final para compatibilidade**
 export default api;
