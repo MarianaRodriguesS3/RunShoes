@@ -25,10 +25,10 @@ app.get('/api/test', (req, res) => {
   res.json({ message: "Backend rodando e acessível!" });
 });
 
-// 3. Rotas principais
-app.use('/api/products', productRoutes);
+// 3. Servir imagens estáticas
+app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
 
-// 4. Servir imagens estáticas
-app.use('/images', express.static(path.join(__dirname, 'images')));
+// 4. Rotas principais
+app.use('/api/products', productRoutes);
 
 module.exports = app;
