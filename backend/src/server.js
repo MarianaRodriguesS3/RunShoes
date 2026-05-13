@@ -1,15 +1,12 @@
-const app = require('./app');
-const db = require('./database/connection');
+const app = require('./app'); // app.js dentro de src
+const db = require('./database/connection'); // connection.js dentro de src/database
 
-(async () => {
-  try {
-    await db.query('SELECT 1');
+const PORT = process.env.PORT || 5000;
+
+// Conecta ao banco e inicia o servidor
+db.connect() // ou db.query('SELECT 1') se estiver usando pool
+  .then(() => {
     console.log('✅ PostgreSQL conectado');
-
-    app.listen(5000, () => {
-      console.log('🚀 Servidor rodando em http://localhost:5000');
-    });
-  } catch (err) {
-    console.error('❌ Falha ao conectar no banco:', err.message);
-  }
-})();
+    app.listen(PORT, () => console.log(`🚀 Servidor rodando em http://localhost:${PORT}`));
+  })
+  .catch(err => console.error("❌ Falha na conexão:", err));

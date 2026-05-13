@@ -7,8 +7,9 @@ const usuarioRoutes = require('./routes/usuarioRoutes');
 
 const app = express();
 
+// Configuração de CORS: permite apenas seu frontend
 const corsOptions = {
-  origin: "https://marianarodriguess3.github.io",
+  origin: "https://marianarodriguess3.github.io", // seu frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 };
