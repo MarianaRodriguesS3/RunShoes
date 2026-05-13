@@ -1,35 +1,30 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-
 const productRoutes = require('./routes/productRoutes');
-const usuarioRoutes = require('./routes/usuarioRoutes');
 
 const app = express();
 
-// Configuração de CORS personalizada
+// 1. Configuração de CORS (O navegador exige a URL exata do GitHub)
 const corsOptions = {
-  // Permitimos o domínio base e o subdiretório do projeto
   origin: [
     "https://marianarodriguess3.github.io",
     "https://marianarodriguess3.github.io/RunShoes"
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
+  credentials: true,
+  optionsSuccessStatus: 200 
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions)); // Ativa o CORS antes de qualquer rota
 app.use(express.json());
 
-// Servir imagens estáticas
-app.use('/images', express.static(path.join(__dirname, '../public/images')));
-
-// Rotas da API
-app.use('/api/products', productRoutes);
-app.use('/api/usuario', usuarioRoutes);
-
-app.get('/', (req, res) => {
-  res.json({ message: 'Backend RunShoes ativo!' });
+// 2. Rota de teste direto (Se essa funcionar, o servidor está OK)
+app.get('/api/test', (req, res) => {
+  res.json({ message: "Backend rodando e acessível!" });
 });
+
+// 3. Suas rotas principais
+app.use('/api/products', productRoutes);
 
 module.exports = app;
