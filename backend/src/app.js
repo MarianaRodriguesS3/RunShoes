@@ -8,7 +8,7 @@ const usuarioRoutes = require('./routes/usuarioRoutes');
 const app = express();
 
 const corsOptions = {
-  origin: 'https://marianarodriguess3.github.io/RunShoes/',
+  origin: "https://marianarodriguess3.github.io",
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 };
