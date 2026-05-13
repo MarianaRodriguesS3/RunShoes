@@ -1,12 +1,11 @@
 import axios from "axios";
 
-// Cria instância do axios apontando para o backend
 const api = axios.create({
+  // URL do seu backend no Render
   baseURL: "https://runshoes-backend.onrender.com/api",
-  // baseURL: "http://localhost:5000/api",
 });
 
-// Adiciona automaticamente o token JWT nos headers
+// Adiciona o token JWT se existir
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -15,25 +14,25 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Intercepta respostas com erro
+// Tratamento de erros globais
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Se o token expirou ou não autorizado, desloga
     if (error.response?.status === 401) {
       localStorage.removeItem("token");
       localStorage.removeItem("usuario");
-      window.location.href = "/login";
+      
+      // Ajustado para o caminho do GitHub Pages
+      window.location.href = "/RunShoes/login"; 
     }
     return Promise.reject(error);
   }
 );
 
-// Função helper para obter os dados do usuário logado
 export const getUsuarioLogado = async () => {
   try {
     const res = await api.get("/usuario/dados-usuario");
-    return res.data.user; // retorna o objeto user do backend
+    return res.data.user;
   } catch (err) {
     console.error("Erro ao buscar dados do usuário logado:", err);
     return null;

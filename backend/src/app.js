@@ -7,15 +7,18 @@ const usuarioRoutes = require('./routes/usuarioRoutes');
 
 const app = express();
 
-// Configuração de CORS: permite apenas seu frontend
+// Configuração de CORS personalizada
 const corsOptions = {
-  origin: "https://marianarodriguess3.github.io", // seu frontend
+  // Permitimos o domínio base e o subdiretório do projeto
+  origin: [
+    "https://marianarodriguess3.github.io",
+    "https://marianarodriguess3.github.io/RunShoes"
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 };
-app.use(cors(corsOptions));
 
-// Permite receber JSON no body das requisições
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Servir imagens estáticas
@@ -25,7 +28,6 @@ app.use('/images', express.static(path.join(__dirname, '../public/images')));
 app.use('/api/products', productRoutes);
 app.use('/api/usuario', usuarioRoutes);
 
-// Rota raiz para teste de saúde do backend
 app.get('/', (req, res) => {
   res.json({ message: 'Backend RunShoes ativo!' });
 });
