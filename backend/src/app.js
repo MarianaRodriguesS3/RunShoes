@@ -26,7 +26,8 @@ app.get('/api/test', (req, res) => {
 });
 
 // 3. Servir imagens estáticas
-app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
+// Servir imagens estáticas saindo da pasta 'src' para encontrar a 'public'
+app.use('/images', express.static(path.join(__dirname, '..', 'public', 'images')));
 
 // 4. Rotas principais
 app.use('/api/products', productRoutes);
