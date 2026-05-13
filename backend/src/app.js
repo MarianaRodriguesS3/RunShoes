@@ -5,7 +5,7 @@ const productRoutes = require('./routes/productRoutes');
 
 const app = express();
 
-// 1. Configuração de CORS (O navegador exige a URL exata do GitHub)
+// 1. Configuração de CORS
 const corsOptions = {
   origin: [
     "https://marianarodriguess3.github.io",
@@ -17,15 +17,18 @@ const corsOptions = {
   optionsSuccessStatus: 200 
 };
 
-app.use(cors(corsOptions)); // Ativa o CORS antes de qualquer rota
+app.use(cors(corsOptions));
 app.use(express.json());
 
-// 2. Rota de teste direto (Se essa funcionar, o servidor está OK)
+// 2. Rota de teste
 app.get('/api/test', (req, res) => {
   res.json({ message: "Backend rodando e acessível!" });
 });
 
-// 3. Suas rotas principais
+// 3. Rotas principais
 app.use('/api/products', productRoutes);
+
+// 4. Servir imagens estáticas
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;
