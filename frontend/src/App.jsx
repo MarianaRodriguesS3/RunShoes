@@ -20,7 +20,7 @@ import EditarCadastro from "./pages/EditarCadastro";
 
 function App() {
   return (
-    <BrowserRouter basename="/LojaVirtualPOO">
+    <BrowserRouter basename="/RunShoes/">
       <ScrollToTop />
       <Header />
       <CartMessage />
