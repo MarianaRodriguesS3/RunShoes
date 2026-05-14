@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const productRoutes = require('./routes/productRoutes');
+const usuarioRoutes = require('./routes/usuarioRoutes'); // novo
 
 const app = express();
 
@@ -31,5 +32,6 @@ app.use('/images', express.static(path.join(__dirname, '..', 'public', 'images')
 
 // 4. Rotas principais
 app.use('/api/products', productRoutes);
+app.use('/api/usuario', usuarioRoutes); // 2. REGISTRAR A ROTA
 
 module.exports = app;

@@ -2,7 +2,8 @@ import axios from "axios";
 
 // Cria a instância do axios
 const api = axios.create({
-  baseURL: "https://runshoes-backend.onrender.com/api",
+  baseURL: "http://localhost:5000/api",
+  // baseURL: "https://runshoes-backend.onrender.com/api",
 });
 
 // Adiciona o token JWT se existir
@@ -21,7 +22,7 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem("token");
       localStorage.removeItem("usuario");
-      window.location.href = "/RunShoes/login"; 
+      window.location.href = "/RunShoes/login";
     }
     return Promise.reject(error);
   }
