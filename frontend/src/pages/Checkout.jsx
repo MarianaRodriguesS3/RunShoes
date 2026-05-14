@@ -3,6 +3,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import BtnFinalizarCompra from "../components/BtnFinalizarCompra";
 import "../pages/Checkout.css";
 
+const IMAGE_BASE_URL = window.location.hostname === "localhost" 
+  ? "http://localhost:5000/images" 
+  : "https://runshoes-backend.onrender.com/images";
+
 function Checkout() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -30,7 +34,7 @@ function Checkout() {
       <div className="cart-item checkout-layout-grid">
         <div className="checkout-col-image">
           <img
-            src={`http://localhost:5000/images/${product.image}`}
+            src={`${IMAGE_BASE_URL}/${product.image}`}
             alt={product.name}
           />
         </div>
@@ -71,7 +75,6 @@ function Checkout() {
               onClick={() =>
                 navigate("/finalizar-compra", {
                   state: {
-                    // Passa como array 'products' para compatibilidade
                     products: [
                       {
                         ...product,
