@@ -2,8 +2,11 @@ import axios from "axios";
 
 // Cria a instância do axios
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",
-  // baseURL: "https://runshoes-backend.onrender.com/api",
+  baseURL: window.location.hostname === "localhost" 
+    ? "http://localhost:5000/api" 
+    : "https://runshoes-backend.onrender.com/api",
+    // baseURL: "https://runshoes-backend.onrender.com/api",
+    
 });
 
 // Adiciona o token JWT se existir
