@@ -3,18 +3,20 @@ import { useLocation, useNavigate } from "react-router-dom";
 import BtnFinalizarCompra from "../components/BtnFinalizarCompra";
 import "../pages/Checkout.css";
 
-const IMAGE_BASE_URL = window.location.hostname === "localhost" 
-  ? "http://localhost:5000/images" 
-  : "https://runshoes-backend.onrender.com/images";
+// Definindo a URL fixa como no seu ProductCard para evitar conflitos de ambiente
+const IMAGE_BASE_URL = "https://runshoes-backend.onrender.com/images";
 
 function Checkout() {
   const location = useLocation();
   const navigate = useNavigate();
+  
+  // Resgatando o produto enviado via state
   const { product } = location.state || {};
 
   const [selectedSize, setSelectedSize] = useState(product?.size || null);
   const [quantity, setQuantity] = useState(product?.quantity || 1);
 
+  // Se não houver produto (acesso direto à URL, por exemplo), exibe aviso
   if (!product) {
     return (
       <div className="cart-container">
@@ -33,9 +35,13 @@ function Checkout() {
 
       <div className="cart-item checkout-layout-grid">
         <div className="checkout-col-image">
+          {/* Lógica idêntica ao ProductCard */}
           <img
             src={`${IMAGE_BASE_URL}/${product.image}`}
             alt={product.name}
+            onError={(e) => {
+              console.error("Erro ao carregar imagem no checkout:", e.target.src);
+            }}
           />
         </div>
 
