@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const productRoutes = require('./routes/productRoutes');
-const usuarioRoutes = require('./routes/usuarioRoutes'); // novo
+const usuarioRoutes = require('./routes/usuarioRoutes');
 
 const app = express();
 
@@ -19,6 +19,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Private-Network", "true");
+  next();
+});
+
 app.use(express.json());
 
 // 2. Rota de teste
@@ -27,11 +33,10 @@ app.get('/api/test', (req, res) => {
 });
 
 // 3. Servir imagens estáticas
-// Servir imagens estáticas saindo da pasta 'src' para encontrar a 'public'
 app.use('/images', express.static(path.join(__dirname, '..', 'public', 'images')));
 
 // 4. Rotas principais
 app.use('/api/products', productRoutes);
-app.use('/api/usuario', usuarioRoutes); // 2. REGISTRAR A ROTA
+app.use('/api/usuario', usuarioRoutes);
 
 module.exports = app;
