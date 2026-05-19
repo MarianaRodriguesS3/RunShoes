@@ -3,20 +3,28 @@ import { useLocation, useNavigate } from "react-router-dom";
 import BtnFinalizarCompra from "../components/BtnFinalizarCompra";
 import "../pages/Checkout.css";
 
-// Definindo a URL fixa como no seu ProductCard para evitar conflitos de ambiente
 const IMAGE_BASE_URL = "https://runshoes-backend.onrender.com/images";
 
 function Checkout() {
   const location = useLocation();
   const navigate = useNavigate();
   
-  // Resgatando o produto enviado via state
-  const { product } = location.state || {};
+  // 1. Tenta pegar do state do router. Se não achar, tenta recuperar do localStorage
+  const [product] = useState(() => {
+    if (location.state?.product) {
+      // Salva no localStorage para caso o usuário dê F5 na página hospedada
+      localStorage.setItem("runshoes_checkout_product", JSON.stringify(location.state.product));
+      return location.state.product;
+    }
+    
+    const savedProduct = localStorage.getItem("runshoes_checkout_product");
+    return savedProduct ? JSON.parse(savedProduct) : null;
+  });
 
   const [selectedSize, setSelectedSize] = useState(product?.size || null);
   const [quantity, setQuantity] = useState(product?.quantity || 1);
 
-  // Se não houver produto (acesso direto à URL, por exemplo), exibe aviso
+  // Se mesmo no localStorage não existir produto, aí sim exibe o aviso
   if (!product) {
     return (
       <div className="cart-container">
