@@ -4,6 +4,8 @@ import { CartContext } from "../context/CartContext";
 import BtnFinalizarCompra from "../components/BtnFinalizarCompra";
 import "./Cart.css";
 
+const IMAGE_BASE_URL = "https://runshoes-backend.onrender.com/images";
+
 function Cart() {
   const { cartItems, removeFromCart, clearCart, updateQuantity, userToken } =
     useContext(CartContext);
@@ -21,6 +23,20 @@ function Cart() {
     });
     setSelectedItems(initialSelection);
   }, [cartItems]);
+
+  // 🔧 Normaliza e limpa a URL da imagem para apontar sempre para o Render
+  const fixImageUrl = (image) => {
+    if (!image) return "";
+
+    if (image.startsWith("https://runshoes-backend.onrender.com")) {
+      return image;
+    }
+
+    const cleanPath = image.replace(/\\/g, "/");
+    const fileName = cleanPath.includes("/") ? cleanPath.split("/").pop() : cleanPath;
+
+    return `${IMAGE_BASE_URL}/${fileName}`;
+  };
 
   const handleCheckboxChange = (key) => {
     setSelectedItems((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -40,14 +56,19 @@ function Cart() {
   }
 
   const handleBuySingle = (item) => {
-    navigate("/finalizar-compra", { state: { products: [item] } });
+    // 🌟 Garante que o item individual vá com a imagem correta para o checkout
+    const cleanItem = { ...item, image: fixImageUrl(item.image) };
+    navigate("/finalizar-compra", { state: { products: [cleanItem] } });
   };
 
   const handleFinalizeCart = () => {
-    const itemsToBuy = cartItems.filter((item) => {
-      const key = `${item.id}-${item.size}-${item.name}`;
-      return selectedItems[key];
-    });
+    const itemsToBuy = cartItems
+      .filter((item) => {
+        const key = `${item.id}-${item.size}-${item.name}`;
+        return selectedItems[key];
+      })
+      // 🌟 Garante que todos os itens selecionados vão com a imagem limpa para o checkout
+      .map((item) => ({ ...item, image: fixImageUrl(item.image) }));
 
     if (itemsToBuy.length === 0) {
       alert("Nenhum produto selecionado para compra.");
@@ -72,7 +93,15 @@ function Cart() {
               className="cart-checkbox"
             />
 
-            <img src={`http://localhost:5000/images/${item.image}`} alt={item.name} />
+            {/* 🌟 ALTERADO: Imagem agora usa a função de correção síncrona */}
+            <img 
+              src={fixImageUrl(item.image)} 
+              alt={item.name} 
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = `${IMAGE_BASE_URL}/fallback.jpg`;
+              }}
+            />
 
             <div className="cart-info">
               <h3>{item.name}</h3>
