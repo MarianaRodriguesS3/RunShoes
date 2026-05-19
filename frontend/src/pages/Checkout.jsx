@@ -45,13 +45,16 @@ function Checkout() {
         <div className="checkout-col-image">
           {/* Lógica idêntica ao ProductCard */}
           <img
-            src={
-              product.image.includes("http://localhost")
-                ? product.image.replace("http://localhost:5000", "https://runshoes-backend.onrender.com")
-                : product.image.startsWith("http")
-                  ? product.image
-                  : `${IMAGE_BASE_URL}/${product.image}`
-            }
+            src={(() => {
+              // Se a string contiver barras, pegamos apenas a última parte (o nome do arquivo)
+              if (product.image.includes("/")) {
+                const parts = product.image.split("/");
+                const fileName = parts[parts.length - 1]; // Pega "tenis2.jpeg"
+                return `${IMAGE_BASE_URL}/${fileName}`;
+              }
+              // Se já for apenas o nome do arquivo, monta normalmente
+              return `${IMAGE_BASE_URL}/${product.image}`;
+            })()}
             alt={product.name}
             onError={(e) => {
               console.error("Erro ao carregar imagem no checkout:", e.target.src);
