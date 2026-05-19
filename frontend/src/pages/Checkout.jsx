@@ -8,7 +8,7 @@ const IMAGE_BASE_URL = "https://runshoes-backend.onrender.com/images";
 function Checkout() {
   const location = useLocation();
   const navigate = useNavigate();
-  
+
   // 1. Tenta pegar do state do router. Se não achar, tenta recuperar do localStorage
   const [product] = useState(() => {
     if (location.state?.product) {
@@ -16,7 +16,7 @@ function Checkout() {
       localStorage.setItem("runshoes_checkout_product", JSON.stringify(location.state.product));
       return location.state.product;
     }
-    
+
     const savedProduct = localStorage.getItem("runshoes_checkout_product");
     return savedProduct ? JSON.parse(savedProduct) : null;
   });
@@ -45,7 +45,11 @@ function Checkout() {
         <div className="checkout-col-image">
           {/* Lógica idêntica ao ProductCard */}
           <img
-            src={`${IMAGE_BASE_URL}/${product.image}`}
+            src={
+              product.image.startsWith("http")
+                ? product.image.replace(/http:\/\/localhost:\d+/, "https://runshoes-backend.onrender.com")
+                : `${IMAGE_BASE_URL}/${product.image}`
+            }
             alt={product.name}
             onError={(e) => {
               console.error("Erro ao carregar imagem no checkout:", e.target.src);
