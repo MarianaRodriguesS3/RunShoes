@@ -8,6 +8,8 @@ import { CartContext } from "../context/CartContext";
 import api from "../services/api";
 import axios from "axios";
 
+const IMAGE_BASE_URL = "https://runshoes-backend.onrender.com/images";
+
 export default function FinalizarCompra() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,6 +28,17 @@ export default function FinalizarCompra() {
 
   const [mensagem, setMensagem] = useState({ texto: "", cor: "" });
   const [abaAtiva, setAbaAtiva] = useState(null);
+
+  // 🔧 Garante a URL correta da imagem vinda do Render
+  const fixImageUrl = (image) => {
+    if (!image) return "";
+    if (image.startsWith("https://runshoes-backend.onrender.com")) {
+      return image;
+    }
+    const cleanPath = image.replace(/\\/g, "/");
+    const fileName = cleanPath.includes("/") ? cleanPath.split("/").pop() : cleanPath;
+    return `${IMAGE_BASE_URL}/${fileName}`;
+  };
 
   const exibirMensagem = (texto, cor) => {
     setMensagem({ texto, cor });
@@ -152,8 +165,14 @@ export default function FinalizarCompra() {
     try {
       const token = localStorage.getItem("token");
 
+      // Antes de mandar o payload pro backend, garante que mandamos apenas strings limpas das imagens
+      const produtosProntos = products.map(p => ({
+        ...p,
+        image: p.image.includes("/") ? p.image.split("/").pop() : p.image
+      }));
+
       let payload = {
-        produtos: products,
+        produtos: produtosProntos,
         total: totalGeral,
         formaPagamento: abaAtiva,
         endereco: {
@@ -184,7 +203,7 @@ export default function FinalizarCompra() {
         setTimeout(() => {
           navigate("/status-pedido", {
             state: {
-              produtos: products,
+              produtos: produtosProntos,
               total: totalGeral,
               etapa: 0,
             },
@@ -218,8 +237,12 @@ export default function FinalizarCompra() {
           <div className="cart-item checkout-layout-grid" key={index}>
             <div className="checkout-col-image">
               <img
-                src={`http://localhost:5000/images/${product.image}`}
+                src={fixImageUrl(product.image)} // 🌟 ALTERADO: Passando pela validação limpa do Render
                 alt={product.name}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = `${IMAGE_BASE_URL}/fallback.jpg`;
+                }}
               />
             </div>
             <div className="checkout-col-info">
