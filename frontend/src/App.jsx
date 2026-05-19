@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+// Importamos o HashRouter apelidando ele de Router para facilitar
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -20,7 +21,7 @@ import EditarCadastro from "./pages/EditarCadastro";
 
 function App() {
   return (
-    <BrowserRouter basename="/RunShoes/">
+    <Router>
       <ScrollToTop />
       <Header />
       <CartMessage />
@@ -74,7 +75,7 @@ function App() {
       </main>
 
       <Footer />
-    </BrowserRouter>
+    </Router>
   );
 }
 
