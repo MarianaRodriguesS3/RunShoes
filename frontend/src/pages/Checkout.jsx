@@ -46,8 +46,8 @@ function Checkout() {
           {/* Lógica idêntica ao ProductCard */}
           <img
             src={
-              product.image.startsWith("http")
-                ? product.image.replace(/http:\/\/localhost:\d+/, "https://runshoes-backend.onrender.com")
+              product.image.includes("http://localhost")
+                ? product.image.replace("http://localhost:5000", "https://runshoes-backend.onrender.com")
                 : `${IMAGE_BASE_URL}/${product.image}`
             }
             alt={product.name}
