@@ -8,7 +8,6 @@ function ProductCard({ product }) {
   const navigate = useNavigate();
 
   const IMAGE_BASE_URL = "https://runshoes-backend.onrender.com/images";
-
   const sizes = [34, 35, 36, 37, 38, 39, 40, 41, 42];
 
   const [centerIndex, setCenterIndex] = useState(4);
@@ -42,7 +41,7 @@ function ProductCard({ product }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // 🔧 função para normalizar a URL da imagem
+  // 🔧 Normaliza a URL da imagem
   const fixImageUrl = (img) => {
     if (!img) return "";
     const fileName = img.includes("/") ? img.split("/").pop() : img;
@@ -52,9 +51,7 @@ function ProductCard({ product }) {
   const handleAddToCart = () => {
     if (userToken === "guest") return navigate("/login");
     if (!selectedSize) return setSizeError("Selecione um tamanho!");
-
     addToCart({ ...product, size: selectedSize, image: fixImageUrl(product.image) });
-
     setSelectedSize(null);
     setSizeError("");
   };
@@ -62,18 +59,16 @@ function ProductCard({ product }) {
   const handleBuyNow = () => {
     if (userToken === "guest") return navigate("/login");
     if (!selectedSize) return setSizeError("Selecione um tamanho!");
-
     navigate("/checkout", {
       state: {
         product: {
           ...product,
           size: selectedSize,
           quantity: 1,
-          image: fixImageUrl(product.image), // ✅ normaliza aqui também
+          image: fixImageUrl(product.image),
         },
       },
     });
-
     setSelectedSize(null);
     setSizeError("");
   };
@@ -94,7 +89,7 @@ function ProductCard({ product }) {
         <p className="price">R$ {Number(product.price).toFixed(2)}</p>
 
         <div className="size-carousel" ref={containerRef} onMouseMove={handleMouseMove}>
-          {visibleSizes.map((size) => (
+          {visibleSizes.map(size => (
             <button
               key={size}
               className={`size-btn ${selectedSize === size ? "selected" : ""}`}
