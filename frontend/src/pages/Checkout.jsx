@@ -35,11 +35,9 @@ function Checkout() {
   useEffect(() => {
     let prod = null;
 
-    // Prioridade para o state vindo do navigate
     if (location.state?.product) {
-      prod = { ...location.state.product }; // Cria uma cópia para não afetar o state original
+      prod = { ...location.state.product }; 
     } else {
-      // Tenta pegar do localStorage caso o usuário dê F5 na página
       const saved = localStorage.getItem("runshoes_checkout_product");
       if (saved) {
         try {
@@ -50,12 +48,6 @@ function Checkout() {
       }
     }
 
-    // Corrige a URL da imagem se o produto existir
-    if (prod?.image) {
-      prod.image = fixImageUrl(prod.image);
-    }
-
-    // Salva a versão corrigida no storage e atualiza os estados
     if (prod) {
       localStorage.setItem("runshoes_checkout_product", JSON.stringify(prod));
       setProduct(prod);
@@ -86,7 +78,7 @@ function Checkout() {
         {/* IMAGEM */}
         <div className="checkout-col-image">
           <img
-            src={product.image}
+            src={fixImageUrl(product.image)} // 🌟 FORÇA A CORREÇÃO DIRETO NA RENDERIZAÇÃO
             alt={product.name}
             onError={(e) => {
               e.target.onerror = null; // Evita loop infinito se o fallback também falhar
@@ -140,6 +132,7 @@ function Checkout() {
                     products: [
                       {
                         ...product,
+                        image: fixImageUrl(product.image), // 🌟 Garante que o próximo componente receba a URL certa
                         size: selectedSize,
                         quantity,
                       },
