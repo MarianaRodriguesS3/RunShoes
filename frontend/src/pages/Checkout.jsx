@@ -46,13 +46,19 @@ function Checkout() {
           {/* Lógica idêntica ao ProductCard */}
           <img
             src={(() => {
-              // Se a string contiver barras, pegamos apenas a última parte (o nome do arquivo)
-              if (product.image.includes("/")) {
+              // 1. Se a imagem contiver o caminho completo do localhost, limpamos e apontamos para o Render
+              if (product.image && product.image.includes("http://localhost:5000")) {
+                return product.image.replace("http://localhost:5000", "https://runshoes-backend.onrender.com");
+              }
+
+              // 2. Se a imagem contiver o localhost mas em outra porta, ou em formato de rota /images/
+              if (product.image && product.image.includes("localhost")) {
                 const parts = product.image.split("/");
-                const fileName = parts[parts.length - 1]; // Pega "tenis2.jpeg"
+                const fileName = parts[parts.length - 1];
                 return `${IMAGE_BASE_URL}/${fileName}`;
               }
-              // Se já for apenas o nome do arquivo, monta normalmente
+
+              // 3. Se já for apenas o nome do arquivo (como funciona local), mantém a lógica padrão
               return `${IMAGE_BASE_URL}/${product.image}`;
             })()}
             alt={product.name}
