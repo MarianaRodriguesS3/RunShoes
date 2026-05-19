@@ -9,22 +9,62 @@ function Checkout() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // 1. Tenta pegar do state do router. Se não achar, tenta recuperar do localStorage
-  const [product] = useState(() => {
-    if (location.state?.product) {
-      // Salva no localStorage para caso o usuário dê F5 na página hospedada
-      localStorage.setItem("runshoes_checkout_product", JSON.stringify(location.state.product));
-      return location.state.product;
+  // 🔧 normaliza URL da imagem (CORREÇÃO PRINCIPAL)
+  const fixImageUrl = (image) => {
+    if (!image) return "";
+
+    // caso venha localhost salvo no localStorage antigo
+    if (image.includes("localhost")) {
+      const fileName = image.split("/").pop();
+      return `${IMAGE_BASE_URL}/${fileName}`;
     }
 
-    const savedProduct = localStorage.getItem("runshoes_checkout_product");
-    return savedProduct ? JSON.parse(savedProduct) : null;
+    // caso venha URL completa do backend local antigo
+    if (image.startsWith("http://localhost")) {
+      return image.replace(
+        "http://localhost:5000",
+        "https://runshoes-backend.onrender.com"
+      );
+    }
+
+    // caso normal (só nome do arquivo)
+    return `${IMAGE_BASE_URL}/${image}`;
+  };
+
+  // 🔧 pega produto do state ou localStorage
+  const [product] = useState(() => {
+    let prod = null;
+
+    if (location.state?.product) {
+      prod = location.state.product;
+
+      // salva versão corrigida no storage
+      localStorage.setItem(
+        "runshoes_checkout_product",
+        JSON.stringify(prod)
+      );
+
+      return prod;
+    }
+
+    const saved = localStorage.getItem("runshoes_checkout_product");
+
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        localStorage.removeItem("runshoes_checkout_product");
+        return null;
+      }
+    }
+
+    return null;
   });
 
   const [selectedSize, setSelectedSize] = useState(product?.size || null);
   const [quantity, setQuantity] = useState(product?.quantity || 1);
 
-  // Se mesmo no localStorage não existir produto, aí sim exibe o aviso
+  // sem produto
   if (!product) {
     return (
       <div className="cart-container">
@@ -42,38 +82,28 @@ function Checkout() {
       <h1>Compra</h1>
 
       <div className="cart-item checkout-layout-grid">
+
+        {/* IMAGEM */}
         <div className="checkout-col-image">
-          {/* Lógica idêntica ao ProductCard */}
           <img
-            src={(() => {
-              // 1. Se a imagem contiver o caminho completo do localhost, limpamos e apontamos para o Render
-              if (product.image && product.image.includes("http://localhost:5000")) {
-                return product.image.replace("http://localhost:5000", "https://runshoes-backend.onrender.com");
-              }
-
-              // 2. Se a imagem contiver o localhost mas em outra porta, ou em formato de rota /images/
-              if (product.image && product.image.includes("localhost")) {
-                const parts = product.image.split("/");
-                const fileName = parts[parts.length - 1];
-                return `${IMAGE_BASE_URL}/${fileName}`;
-              }
-
-              // 3. Se já for apenas o nome do arquivo (como funciona local), mantém a lógica padrão
-              return `${IMAGE_BASE_URL}/${product.image}`;
-            })()}
+            src={fixImageUrl(product.image)}
             alt={product.name}
             onError={(e) => {
-              console.error("Erro ao carregar imagem no checkout:", e.target.src);
+              console.error("Erro ao carregar imagem:", e.target.src);
+              e.target.src = `${IMAGE_BASE_URL}/fallback.jpg`;
             }}
           />
         </div>
 
+        {/* TAMANHOS + QTD */}
         <div className="checkout-col-selectors">
           <div className="size-selector">
             {[34, 35, 36, 37, 38, 39, 40, 41, 42].map((size) => (
               <button
                 key={size}
-                className={`size-btn ${selectedSize === size ? "selected" : ""}`}
+                className={`size-btn ${
+                  selectedSize === size ? "selected" : ""
+                }`}
                 onClick={() => setSelectedSize(size)}
               >
                 {size}
@@ -88,19 +118,30 @@ function Checkout() {
           </div>
         </div>
 
+        {/* INFO */}
         <div className="checkout-col-info">
           <h3>{product.name}</h3>
-          <p className="price">R$ {(product.price * quantity).toFixed(2)}</p>
+          <p className="price">
+            R$ {(product.price * quantity).toFixed(2)}
+          </p>
         </div>
       </div>
 
+      {/* TOTAL */}
       <div className="cart-total-section">
         <div className="total-content">
-          <h2>Total: R$ {(product.price * quantity).toFixed(2)}</h2>
+          <h2>
+            Total: R$ {(product.price * quantity).toFixed(2)}
+          </h2>
+
           <div className="total-actions">
             <BtnFinalizarCompra
               disabled={!selectedSize}
-              texto={selectedSize ? "Finalizar Compra" : "Selecione o Tamanho"}
+              texto={
+                selectedSize
+                  ? "Finalizar Compra"
+                  : "Selecione o Tamanho"
+              }
               onClick={() =>
                 navigate("/finalizar-compra", {
                   state: {
@@ -108,7 +149,8 @@ function Checkout() {
                       {
                         ...product,
                         size: selectedSize,
-                        quantity: quantity,
+                        quantity,
+                        image: fixImageUrl(product.image),
                       },
                     ],
                   },
