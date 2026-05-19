@@ -9,27 +9,37 @@ function Checkout() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // 🔧 normaliza URL da imagem
+  // 🔧 Normaliza a URL da imagem de forma inteligente
   const fixImageUrl = (image) => {
     if (!image) return "";
-    // Se a URL contém localhost ou http local antigo, extrai apenas o nome do arquivo
-    const fileName = image.includes("/")
-      ? image.split("/").pop()
-      : image;
+
+    // 1. Se já for uma URL do Render atualizada, não mexe nela!
+    if (image.startsWith("https://runshoes-backend.onrender.com")) {
+      return image;
+    }
+
+    // 2. Se for uma URL completa antiga (localhost, etc) ou caminho com barras do Windows, limpa
+    const cleanPath = image.replace(/\\/g, "/");
+    const fileName = cleanPath.includes("/") ? cleanPath.split("/").pop() : cleanPath;
+
+    // 3. Retorna a URL final apontando para o Render
     return `${IMAGE_BASE_URL}/${fileName}`;
   };
 
-  // 🔧 pega produto do state ou localStorage
+  // Estados do componente
   const [product, setProduct] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
+  // 🔧 Pega o produto do state ou localStorage ao carregar a página
   useEffect(() => {
     let prod = null;
 
-    // prioridade para o state vindo do navigate
+    // Prioridade para o state vindo do navigate
     if (location.state?.product) {
-      prod = location.state.product;
+      prod = { ...location.state.product }; // Cria uma cópia para não afetar o state original
     } else {
-      // tenta pegar do localStorage
+      // Tenta pegar do localStorage caso o usuário dê F5 na página
       const saved = localStorage.getItem("runshoes_checkout_product");
       if (saved) {
         try {
@@ -40,23 +50,26 @@ function Checkout() {
       }
     }
 
-    // Corrige a URL da imagem automaticamente
+    // Corrige a URL da imagem se o produto existir
     if (prod?.image) {
       prod.image = fixImageUrl(prod.image);
     }
 
-    // Salva a versão corrigida no storage
+    // Salva a versão corrigida no storage e atualiza os estados
     if (prod) {
       localStorage.setItem("runshoes_checkout_product", JSON.stringify(prod));
+      setProduct(prod);
+      setSelectedSize(prod.size || null);
+      setQuantity(prod.quantity || 1);
     }
-
-    setProduct(prod);
   }, [location.state]);
 
-  const [selectedSize, setSelectedSize] = useState(product?.size || null);
-  const [quantity, setQuantity] = useState(product?.quantity || 1);
+  // Controle de quantidade
+  const handleQuantityChange = (delta) => {
+    setQuantity((prev) => Math.max(1, prev + delta));
+  };
 
-  // sem produto
+  // Estado de carregamento / sem produto selecionado
   if (!product) {
     return (
       <div className="cart-container">
@@ -64,10 +77,6 @@ function Checkout() {
       </div>
     );
   }
-
-  const handleQuantityChange = (delta) => {
-    setQuantity((prev) => Math.max(1, prev + delta));
-  };
 
   return (
     <div className="cart-container">
@@ -79,7 +88,10 @@ function Checkout() {
           <img
             src={product.image}
             alt={product.name}
-            onError={(e) => { e.target.src = `${IMAGE_BASE_URL}/fallback.jpg`; }}
+            onError={(e) => {
+              e.target.onerror = null; // Evita loop infinito se o fallback também falhar
+              e.target.src = `${IMAGE_BASE_URL}/fallback.jpg`;
+            }}
           />
         </div>
 
