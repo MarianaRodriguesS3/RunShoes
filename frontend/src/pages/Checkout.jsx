@@ -13,21 +13,17 @@ function Checkout() {
   const fixImageUrl = (image) => {
     if (!image) return "";
 
-    // caso venha localhost salvo no localStorage antigo
-    if (image.includes("localhost")) {
-      const fileName = image.split("/").pop();
-      return `${IMAGE_BASE_URL}/${fileName}`;
+    // se já for URL completa com http ou https
+    if (image.startsWith("http://") || image.startsWith("https://")) {
+      // se for localhost, troca para backend real
+      if (image.includes("localhost")) {
+        const fileName = image.split("/").pop();
+        return `${IMAGE_BASE_URL}/${fileName}`;
+      }
+      return image; // já é URL válida
     }
 
-    // caso venha URL completa do backend local antigo
-    if (image.startsWith("http://localhost")) {
-      return image.replace(
-        "http://localhost:5000",
-        "https://runshoes-backend.onrender.com"
-      );
-    }
-
-    // caso normal (só nome do arquivo)
+    // caso venha só o nome do arquivo
     return `${IMAGE_BASE_URL}/${image}`;
   };
 
@@ -36,22 +32,20 @@ function Checkout() {
     let prod = null;
 
     if (location.state?.product) {
-      prod = location.state.product;
+      prod = { ...location.state.product, image: fixImageUrl(location.state.product.image) };
 
       // salva versão corrigida no storage
-      localStorage.setItem(
-        "runshoes_checkout_product",
-        JSON.stringify(prod)
-      );
-
+      localStorage.setItem("runshoes_checkout_product", JSON.stringify(prod));
       return prod;
     }
 
     const saved = localStorage.getItem("runshoes_checkout_product");
-
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        // corrige a imagem caso esteja em localhost antigo
+        parsed.image = fixImageUrl(parsed.image);
+        return parsed;
       } catch (e) {
         localStorage.removeItem("runshoes_checkout_product");
         return null;
@@ -82,11 +76,10 @@ function Checkout() {
       <h1>Compra</h1>
 
       <div className="cart-item checkout-layout-grid">
-
         {/* IMAGEM */}
         <div className="checkout-col-image">
           <img
-            src={fixImageUrl(product.image)}
+            src={product.image}
             alt={product.name}
             onError={(e) => {
               console.error("Erro ao carregar imagem:", e.target.src);
@@ -101,9 +94,7 @@ function Checkout() {
             {[34, 35, 36, 37, 38, 39, 40, 41, 42].map((size) => (
               <button
                 key={size}
-                className={`size-btn ${
-                  selectedSize === size ? "selected" : ""
-                }`}
+                className={`size-btn ${selectedSize === size ? "selected" : ""}`}
                 onClick={() => setSelectedSize(size)}
               >
                 {size}
@@ -121,27 +112,19 @@ function Checkout() {
         {/* INFO */}
         <div className="checkout-col-info">
           <h3>{product.name}</h3>
-          <p className="price">
-            R$ {(product.price * quantity).toFixed(2)}
-          </p>
+          <p className="price">R$ {(product.price * quantity).toFixed(2)}</p>
         </div>
       </div>
 
       {/* TOTAL */}
       <div className="cart-total-section">
         <div className="total-content">
-          <h2>
-            Total: R$ {(product.price * quantity).toFixed(2)}
-          </h2>
+          <h2>Total: R$ {(product.price * quantity).toFixed(2)}</h2>
 
           <div className="total-actions">
             <BtnFinalizarCompra
               disabled={!selectedSize}
-              texto={
-                selectedSize
-                  ? "Finalizar Compra"
-                  : "Selecione o Tamanho"
-              }
+              texto={selectedSize ? "Finalizar Compra" : "Selecione o Tamanho"}
               onClick={() =>
                 navigate("/finalizar-compra", {
                   state: {
@@ -150,7 +133,6 @@ function Checkout() {
                         ...product,
                         size: selectedSize,
                         quantity,
-                        image: fixImageUrl(product.image),
                       },
                     ],
                   },

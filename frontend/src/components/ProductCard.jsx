@@ -18,19 +18,13 @@ function ProductCard({ product }) {
   const containerRef = useRef(null);
   const cardRef = useRef(null);
 
-  const moveLeft = () => {
-    setCenterIndex((prev) => Math.max(prev - 1, 2));
-  };
-
-  const moveRight = () => {
-    setCenterIndex((prev) => Math.min(prev + 1, sizes.length - 3));
-  };
+  const moveLeft = () => setCenterIndex(prev => Math.max(prev - 1, 2));
+  const moveRight = () => setCenterIndex(prev => Math.min(prev + 1, sizes.length - 3));
 
   const handleMouseMove = (e) => {
     const rect = containerRef.current.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     const center = rect.width / 2;
-
     if (mouseX > center + 40) moveRight();
     if (mouseX < center - 40) moveLeft();
   };
@@ -44,22 +38,22 @@ function ProductCard({ product }) {
         setSizeError("");
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // 🔧 função para normalizar a URL da imagem
+  const fixImageUrl = (img) => {
+    if (!img) return "";
+    const fileName = img.includes("/") ? img.split("/").pop() : img;
+    return `${IMAGE_BASE_URL}/${fileName}`;
+  };
 
   const handleAddToCart = () => {
     if (userToken === "guest") return navigate("/login");
+    if (!selectedSize) return setSizeError("Selecione um tamanho!");
 
-    if (!selectedSize) {
-      return setSizeError("Selecione um tamanho!");
-    }
-
-    addToCart({ ...product, size: selectedSize });
+    addToCart({ ...product, size: selectedSize, image: fixImageUrl(product.image) });
 
     setSelectedSize(null);
     setSizeError("");
@@ -67,10 +61,7 @@ function ProductCard({ product }) {
 
   const handleBuyNow = () => {
     if (userToken === "guest") return navigate("/login");
-
-    if (!selectedSize) {
-      return setSizeError("Selecione um tamanho!");
-    }
+    if (!selectedSize) return setSizeError("Selecione um tamanho!");
 
     navigate("/checkout", {
       state: {
@@ -78,6 +69,7 @@ function ProductCard({ product }) {
           ...product,
           size: selectedSize,
           quantity: 1,
+          image: fixImageUrl(product.image), // ✅ normaliza aqui também
         },
       },
     });
@@ -88,55 +80,36 @@ function ProductCard({ product }) {
 
   return (
     <div className="product-card" ref={cardRef}>
-
       <div className="product-image">
         <img
-          src={`${IMAGE_BASE_URL}/${product.image}`}
+          src={fixImageUrl(product.image)}
           alt={product.name}
+          onError={(e) => { e.target.src = `${IMAGE_BASE_URL}/fallback.jpg`; }}
         />
       </div>
 
       <div className="product-info">
         <h3>{product.name}</h3>
-
         <p className="description">{product.description}</p>
+        <p className="price">R$ {Number(product.price).toFixed(2)}</p>
 
-        <p className="price">
-          R$ {Number(product.price).toFixed(2)}
-        </p>
-
-        <div
-          className="size-carousel"
-          ref={containerRef}
-          onMouseMove={handleMouseMove}
-        >
+        <div className="size-carousel" ref={containerRef} onMouseMove={handleMouseMove}>
           {visibleSizes.map((size) => (
             <button
               key={size}
               className={`size-btn ${selectedSize === size ? "selected" : ""}`}
-              onClick={() => {
-                setSelectedSize(size);
-                setSizeError("");
-              }}
+              onClick={() => { setSelectedSize(size); setSizeError(""); }}
             >
               {size}
             </button>
           ))}
         </div>
-
-        {sizeError && (
-          <p className="size-error">{sizeError}</p>
-        )}
+        {sizeError && <p className="size-error">{sizeError}</p>}
       </div>
 
       <div className="product-actions">
-        <button className="btn-cart" onClick={handleAddToCart}>
-          Carrinho
-        </button>
-
-        <button className="btn-buy" onClick={handleBuyNow}>
-          Comprar
-        </button>
+        <button className="btn-cart" onClick={handleAddToCart}>Carrinho</button>
+        <button className="btn-buy" onClick={handleBuyNow}>Comprar</button>
       </div>
     </div>
   );
