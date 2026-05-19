@@ -32,8 +32,8 @@ export default function StatusPedido() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        // Aqui você pode alterar a rota para pegar apenas os produtos do pedido
-        const response = await fetch("http://localhost:5000/api/products");
+        // 🌟 ALTERADO: Rota corrigida para buscar os produtos diretamente do Render
+        const response = await fetch("https://runshoes-backend.onrender.com/api/products");
         const data = await response.json();
         setProducts(data);
       } catch (error) {
