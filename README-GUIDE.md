@@ -2,98 +2,85 @@
 
 ## 🏠 Página Home
 
-A página inicial é responsável por buscar e exibir os produtos disponíveis. Ao carregar, faz uma requisição à API (`/api/products`), armazenando os dados no estado com `useState`, enquanto o `useEffect` garante que a busca ocorra apenas na primeira renderização. Em caso de erro, uma mensagem é exibida no console.
+A página inicial é responsável por buscar e exibir os produtos disponíveis. Ao ser carregada, faz uma requisição à API (/api/products), armazenando os dados no estado com useState, enquanto o useEffect garante que a busca ocorra apenas na primeira renderização. Em caso de erro, uma mensagem é exibida no console.
 
-### Componentes utilizados
-- **Banner**: exibe mensagem de boas-vindas e incentiva a exploração dos produtos  
-- **ProductList**: renderiza a listagem de produtos na tela  
+Componentes utilizados
+Banner: exibe mensagem de boas-vindas e incentiva a exploração dos produtos
+ProductList: renderiza a listagem de produtos na tela
 
-Essa página funciona como porta de entrada da aplicação, exibindo os produtos de forma dinâmica a partir da API.
+Essa página funciona como porta de entrada da aplicação, exibindo os produtos de forma dinâmica a partir dos dados recebidos da API.
 
 ---
 
 ## 🧭 Componente Header
 
-O Header gerencia a navegação principal e exibe informações do usuário, integrando acesso à Home, carrinho e área de login/usuário em uma interface fixa no topo.
+O Header gerencia a navegação principal da aplicação, oferecendo acesso à Home, carrinho e área do usuário.
 
-### Funcionalidades
-- Exibe um menu de navegação com:
-  - Acesso à página inicial (Home)
-  - Acesso ao carrinho
-  - Área de usuário (login ou informações do usuário logado)
+Funcionalidades
+Navegação entre páginas com react-router-dom
+Exibição de login ou informações do usuário autenticado
+Controle de logout integrado ao CartContext
+Leitura dos dados do usuário no localStorage
+Mensagem de boas-vindas exibida uma vez por sessão
+Controle de menu dropdown e estados internos com useState
 
-### Controle de usuário
-- Dados do `localStorage` atualizados pelo `userToken`  
-- Logout remove dados, reseta `CartContext` e redireciona para Home  
-
-### Interações e feedback
-- Navegação: carrinho → `/carrinho`, login → `/login`  
-- Mensagem de boas-vindas por sessão (`sessionStorage`)  
-- Ícones SVG e menus controlados por estado interno  
-- Navegação com `react-router-dom`  
-
-Esse componente é essencial para a experiência do usuário, centralizando a navegação e o acesso às principais funcionalidades do sistema.
+O componente centraliza a navegação e o gerenciamento da autenticação, contribuindo para a experiência do usuário na aplicação.
 
 ---
 
 ## 🛒 Página Carrinho (Cart)
 
-A página Cart exibe os produtos adicionados ao carrinho e permite ao usuário gerenciar suas compras de forma dinâmica.
+A página Cart exibe e gerencia os produtos adicionados ao carrinho, permitindo ao usuário revisar e finalizar suas compras.
 
-### Funcionalidades
-- Listagem de itens com imagem, nome, tamanho e preço total  
-- Seleção de produtos para compra (checkbox, todos selecionados por padrão)  
-- Controle de quantidade com atualização em tempo real  
-- Remoção individual ou limpeza completa do carrinho  
+Funcionalidades
+Listagem de itens com imagem, nome, tamanho e preço
+Seleção de produtos para compra com checkbox
+Controle de quantidade em tempo real
+Remoção individual ou limpeza completa do carrinho
+Cálculo automático do total com base nos itens selecionados
+Compra de item único ou finalização de múltiplos produtos
+Controle e integração
+Usuários não autenticados são redirecionados para a Home
+Integração com CartContext para gerenciamento global do carrinho
+Navegação utilizando react-router-dom
+Tratamento e correção automática das URLs das imagens dos produtos
 
-### Cálculo e ações
-- Total calculado dinamicamente considerando apenas itens selecionados  
-- Comprar item individual ou finalizar compra com múltiplos itens  
-- Alertas caso nenhum item esteja selecionado  
-
-### Controle e integração
-- Usuários não autenticados são redirecionados à Home  
-- Usa `CartContext` para gerenciar itens e quantidades  
-- Navegação com `react-router-dom`  
-
-Centraliza toda a gestão do carrinho, permitindo revisar, ajustar e finalizar compras.
+O componente centraliza toda a gestão do carrinho, proporcionando uma experiência dinâmica e organizada para o usuário.
 
 ---
 
 ## 🔐 Página Login
 
-A página Login autentica o usuário, permitindo acesso a funcionalidades protegidas como o carrinho de compras.
+A página Login autentica o usuário, permitindo acesso a funcionalidades protegidas da aplicação, como o carrinho de compras.
 
-### Funcionalidades
-- Login com email e senha  
-- Validação de credenciais via API (`/usuario/login`)  
-- Mensagens de erro em caso de falha  
+Funcionalidades
+Login com email e senha
+Validação das credenciais via API (/usuario/login)
+Exibição de mensagens de erro em caso de falha na autenticação
+Processo de autenticação
+Armazena token e dados do usuário no localStorage
+Atualiza o estado global via CartContext para carregar o carrinho corretamente
+Registra login recente no sessionStorage
+Dispara o evento global userLoggedIn para atualizar componentes da interface, como o Header
+Navegação
+Redireciona para a Home após login
+Links para cadastro, recuperação de senha e retorno à página inicial
+Segurança
+Isola os dados do carrinho por usuário, evitando compartilhamento indevido entre sessões
 
-### Processo de autenticação
-- Armazena token e dados do usuário no `localStorage`  
-- Atualiza estado global via `CartContext` para carregar o carrinho corretamente  
-- Marca login recente no `sessionStorage`  
-- Dispara evento global (`userLoggedIn`) para atualizar componentes como o Header  
-
-### Navegação
-- Redireciona à Home após login  
-- Links para cadastro, recuperação de senha e voltar à página inicial  
-
-### Segurança
-- Isolamento do carrinho por usuário, evitando compartilhamento de dados  
-
-Essencial para controle de acesso e experiência personalizada na aplicação.
+A página é essencial para o controle de acesso e personalização da experiência do usuário na aplicação.
 
 ---
 
 ## 🎯 Componente Banner
 
-O Banner exibe uma seção de destaque na página inicial, com mensagem de boas-vindas e subtítulo incentivando a exploração dos produtos.
+O Banner exibe uma seção de destaque na página inicial, apresentando a identidade visual da aplicação e incentivando a exploração dos produtos.
 
-### Características
-- Componente funcional simples, sem estado ou efeitos  
-- Estilizado via `Banner.css`  
-- Mostra título principal e subtítulo  
+Características
+Componente funcional simples, sem estados ou efeitos
+Exibe a logo da aplicação, título principal e subtítulo
+Estilizado via Banner.css
+Utiliza import.meta.env.BASE_URL para carregar a imagem da logo
 
 Tem como objetivo tornar a interface inicial mais atrativa e acolhedora para o usuário.
 
