@@ -1,124 +1,65 @@
-# 🛒 Loja Virtual – Node.js + React + MySQL
+# 🛒 Run Shoes – Node.js + React + PostgreSQL
 
-Este projeto é uma aplicação completa de **e-commerce**, desenvolvida com **Node.js no backend**, **React no frontend** e **MySQL** como banco de dados. A arquitetura foi pensada com foco em **Programação Orientada a Objetos (POO)** e organização em camadas, garantindo escalabilidade, manutenção facilitada e boas práticas de desenvolvimento. A plataforma permite navegar por produtos, gerenciar carrinho, finalizar compras e administrar contas com segurança, oferecendo uma experiência intuitiva e fluida.
+Este projeto é uma aplicação completa de **e-commerce de calçados**, desenvolvida com **Node.js no backend**, **React no frontend** e **PostgreSQL** como banco de dados relacional. A arquitetura foi projetada sob os princípios de **Programação Orientada a Objetos (POO)** e separação estrita em camadas, garantindo escalabilidade, manutenibilidade e segurança.
 
 ---
 
 ## 🚀 Tecnologias e Arquitetura
 
 ### 📦 Backend
-O backend é responsável por processar regras de negócio, lidar com requisições do frontend e gerenciar a comunicação com o banco de dados.
+Camada responsável pelo processamento das regras de negócio, segurança, gerenciamento de sessões e persistência de dados.
 
-**Tecnologias:**
-- Node.js
-- Express
-- MySQL / (`mysql2`)
-- JavaScript (ES6+)
-- POO + Arquitetura em camadas (MVC / Service / Repository)
-
-**Funcionalidades:**
-- API REST para usuários, produtos e pedidos
-- Autenticação, cadastro e atualização de usuários
-- Validação de dados e segurança (senhas, tokens)
-- Regras de negócio e processamento de pedidos/pagamentos
-- Integração completa com o banco de dados (CRUD)
-
----
+- **Tecnologias:** Node.js, Express, PostgreSQL (`pg`), JWT (`jsonwebtoken`), Criptografia (`bcryptjs`).
+- **Arquitetura:** Orientada a Objetos (POO) dividida em Rotas, Controllers, Services e Models.
+- **Funcionalidades:** API RESTful, autenticação via Bearer Token, queries parametrizadas antinjeção, mascaramento de dados sensíveis e manipulação dinâmica de cadastros e checkouts.
 
 ### 🎨 Frontend
-O frontend é responsável pela interface do usuário, navegação entre páginas, interação com produtos e integração com o backend.
+Interface SPA (Single Page Application) responsiva, focada na experiência do usuário, consumo assíncrono de dados e gerenciamento de estado global.
 
-**Tecnologias:**
-- React
-- Vite
-- JavaScript
-- CSS
-- React Router DOM
-- Context API
+- **Tecnologias:** React, Vite, React Router DOM, Context API, Axios.
+- **Funcionalidades:** Estado global do carrinho, validações locais de formulários, máscaras de inputs (CPF/CEP), integração com API externa (ViaCEP) e simulação de rastreamento logístico em tempo real.
 
-**Funcionalidades:**
-- Interface dinâmica e responsiva
-- Navegação entre páginas
-- Gerenciamento de carrinho e estado global
-- Formulários com validação (login, cadastro, etc.)
-- Consumo da API do backend
-- Feedback visual (mensagens, notificações, interações)
+### 🗄️ Banco de Dados
+Camada de persistência relacional robusta hospedada em nuvem na plataforma **Render**.
+
+- **Tecnologias:** PostgreSQL.
+- **Segurança:** Conexões criptografadas via SSL (`rejectUnauthorized: false`).
+- **Tabelas Principais:** `users` (clientes), `products` (catálogo), `enderecos` (localidades) e `cartoes` (dados financeiros criptografados).
 
 ---
 
-### 🗄 Banco de Dados
-O banco de dados é responsável por armazenar e organizar as informações do sistema, sendo acessado pelo backend para persistência dos dados.
+## 🗺️ Estrutura da Documentação
 
-**Tecnologias:**
-- MySQL com pacote `mysql2`
-- Aplicações auxiliares: XAMPP e phpMyAdmin
+Clique nos tópicos abaixo para visualizar os detalhes de cada módulo do sistema:
 
-**Funcionalidades:**
-- Armazenamento de usuários, produtos e endereços
-- Estrutura relacional com suporte a operações CRUD
-- Garantia de integridade e segurança dos dados
-- Banco: `lojavirtual`
-- Tabelas principais: `users`, `products`, `enderecos`
+### 🎨 Frontend - Componentes e Páginas
+* [🏠 Página Home](./docs/frontend.md#-página-home)
+* [🧭 Componente Header](./docs/frontend.md#-componente-header)
+* [🛒 Página Carrinho (Cart)](./docs/frontend.md#-página-carrinho-cart)
+* [🔐 Página Login](./docs/frontend.md#-página-login)
+* [🎯 Componente Banner](./docs/frontend.md#-componente-banner)
+* [📦 Componente ProductList](./docs/frontend.md#-componente-productlist)
+* [🛍️ Componente ProductCard](./docs/frontend.md#-componente-productcard)
+* [🛒 Contexto CartContext](./docs/frontend.md#-contexto-cartcontext)
+* [🔔 Componente CartMessage](./docs/frontend.md#-componente-cartmessage)
+* [💳 Página Checkout](./docs/frontend.md#-página-checkout)
+* [🧾 Página FinalizarCompra](./docs/frontend.md#-página-finalizarcompra)
+* [🔘 Componente BtnFinalizarCompra](./docs/frontend.md#-componente-btnfinalizarcompra)
+* [💰 Componente AbaPix](./docs/frontend.md#-componente-abapix)
+* [💳 Componente AbaCartao](./docs/frontend.md#-componente-abacartao)
+* [🎴 Componente AnimacaoCartao](./docs/frontend.md#-componente-animacaocartao)
+* [📝 Página de Cadastro](./docs/frontend.md#-página-de-cadastro)
+* [✏️ Página EditarCadastro](./docs/frontend.md#-página-editarcadastro)
+* [🔑 Página ForgotPassword](./docs/frontend.md#-página-forgotpassword)
+* [🔐 Página ResetPassword](./docs/frontend.md#-página-resetpassword)
+* [📦 Página StatusPedido](./docs/frontend.md#-página-statuspedido)
+* [🎴 Componente Footer](./docs/frontend.md#-componente-footer)
 
----
-
-# Frontend
-
-## 🏠 Página Home
-
-## 🧭 Componente Header
-
-## 🛒 Página Carrinho (Cart)
-
-## 🔐 Página Login
-
-## 🎯 Componente Banner
-
-## 📦 Componente ProductList
-
-## 🛍️ Componente ProductCard
-
-## 🛒 Contexto CartContext
-
-## 🔔 Componente CartMessage
-
-## 💳 Página Checkout
-
-## 🧾 Página FinalizarCompra
-
-## 🔘 Componente BtnFinalizarCompra
-
-## 💰 Componente AbaPix
-
-## 💳 Componente AbaCartao
-
-## 🎴 Componente AnimacaoCartao
-
-## 📝 Página de Cadastro
-
-## Página: EditarCadastro
-
-## Página: ForgotPassword
-
-## Página: ResetPassword
-
-## Página: StatusPedido
-
-# Backend
-
-...
-
-
-## Novas Funcionalidades
-
-- Favicon personalizado - feito
-- Criar logo e nome da loja - feito
-
-### Nova pagina
-
-- meus pedidos (pagina que acompanha a compra após ser finalizada) - feito
-- Criar um footer - feito
-
-
-
-
+### 📦 Backend - Camadas da API
+* [📦 Model Product](./docs/backend.md#-model-product)
+* [📦 Model Usuario](./docs/backend.md#-model-usuario)
+* [🎮 Controller ProductController](./docs/backend.md#-controller-productcontroller)
+* [🎮 Controller UsuarioController](./docs/backend.md#-controller-usuariocontroller)
+* [🛠️ Service ProductService](./docs/backend.md#-service-productservice)
+* [🛠️ Service UsuarioService](./docs/backend.md#-service-usuarioservice)
+* [=== Suas novas seções de rotas e middlewares compiladas anteriormente ===]
