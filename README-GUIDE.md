@@ -506,7 +506,7 @@ O componente fecha o layout do ecossistema Run Shoes, auxiliando a navegação f
 
 ---
 
-### Funcionalidades Frontend
+### Funcionalidades Backend
 
 ### Model
 
