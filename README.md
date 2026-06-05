@@ -33,11 +33,17 @@ Camada de persistência relacional robusta hospedada em nuvem na plataforma **Re
 Clique nos tópicos abaixo para visualizar os detalhes de cada módulo do sistema:
 
 ### 🎨 Frontend - Componentes e Páginas
-* [🏠 Página Home](./docs/frontend.md#-página-home)
-* [🧭 Componente Header](./docs/frontend.md#-componente-header)
-* [🛒 Página Carrinho (Cart)](./docs/frontend.md#-página-carrinho-cart)
-* [🔐 Página Login](./docs/frontend.md#-página-login)
-* [🎯 Componente Banner](./docs/frontend.md#-componente-banner)
+
+
+* [🏠 Página Home](README-guide.md#-pagina-home)
+* [🧭 Componente Header](README-guide.md#-componente-header)
+* [🛒 Página Carrinho (Cart)](README-guide.md#-pagina-carrinho-cart)
+* [🔐 Página Login](README-guide.md#-pagina-login)
+* [🎯 Componente Banner](README-guide.md#-componente-banner)
+
+
+
+
 * [📦 Componente ProductList](./docs/frontend.md#-componente-productlist)
 * [🛍️ Componente ProductCard](./docs/frontend.md#-componente-productcard)
 * [🛒 Contexto CartContext](./docs/frontend.md#-contexto-cartcontext)
