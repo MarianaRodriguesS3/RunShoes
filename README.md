@@ -32,40 +32,41 @@ Camada de persistência relacional robusta hospedada em nuvem na plataforma **Re
 
 Clique nos tópicos abaixo para visualizar os detalhes de cada módulo do sistema:
 
+
+
 ### 🎨 Frontend - Componentes e Páginas
-
-
 * [🏠 Página Home](./README-GUIDE.md#home)
 * [🧭 Componente Header](./README-GUIDE.md#header)
 * [🛒 Página Carrinho (Cart)](./README-GUIDE.md#cart)
 * [🔐 Página Login](./README-GUIDE.md#login)
 * [🎯 Componente Banner](./README-GUIDE.md#banner)
-
-
-
-
-* [📦 Componente ProductList](./docs/frontend.md#-componente-productlist)
-* [🛍️ Componente ProductCard](./docs/frontend.md#-componente-productcard)
-* [🛒 Contexto CartContext](./docs/frontend.md#-contexto-cartcontext)
-* [🔔 Componente CartMessage](./docs/frontend.md#-componente-cartmessage)
-* [💳 Página Checkout](./docs/frontend.md#-página-checkout)
-* [🧾 Página FinalizarCompra](./docs/frontend.md#-página-finalizarcompra)
-* [🔘 Componente BtnFinalizarCompra](./docs/frontend.md#-componente-btnfinalizarcompra)
-* [💰 Componente AbaPix](./docs/frontend.md#-componente-abapix)
-* [💳 Componente AbaCartao](./docs/frontend.md#-componente-abacartao)
-* [🎴 Componente AnimacaoCartao](./docs/frontend.md#-componente-animacaocartao)
-* [📝 Página de Cadastro](./docs/frontend.md#-página-de-cadastro)
-* [✏️ Página EditarCadastro](./docs/frontend.md#-página-editarcadastro)
-* [🔑 Página ForgotPassword](./docs/frontend.md#-página-forgotpassword)
-* [🔐 Página ResetPassword](./docs/frontend.md#-página-resetpassword)
-* [📦 Página StatusPedido](./docs/frontend.md#-página-statuspedido)
-* [🎴 Componente Footer](./docs/frontend.md#-componente-footer)
+* [📦 Componente ProductList](./README-GUIDE.md#productlist)
+* [🛍️ Componente ProductCard](./README-GUIDE.md#productcard)
+* [🛒 Contexto CartContext](./README-GUIDE.md#cartcontext)
+* [🔔 Componente CartMessage](./README-GUIDE.md#cartmessage)
+* [💳 Página Checkout](./README-GUIDE.md#checkout)
+* [🧾 Página FinalizarCompra](./README-GUIDE.md#finalizarcompra)
+* [🔘 Componente BtnFinalizarCompra](./README-GUIDE.md#btnfinalizarcompra)
+* [📦 Página StatusPedido](./README-GUIDE.md#statuspedido)
+* [💰 Componente AbaPix](./README-GUIDE.md#abapix)
+* [💳 Componente AbaCartao](./README-GUIDE.md#abacartao)
+* [🎴 Componente AnimacaoCartao](./README-GUIDE.md#animacaocartao)
+* [📝 Página de Cadastro](./README-GUIDE.md#cadastro)
+* [✏️ Página EditarCadastro](./README-GUIDE.md#editarcadastro)
+* [🔑 Página ForgotPassword](./README-GUIDE.md#forgotpassword)
+* [🔐 Página ResetPassword](./README-GUIDE.md#resetpassword)
+* [🎴 Componente Footer](./README-GUIDE.md#footer)
 
 ### 📦 Backend - Camadas da API
-* [📦 Model Product](./docs/backend.md#-model-product)
-* [📦 Model Usuario](./docs/backend.md#-model-usuario)
-* [🎮 Controller ProductController](./docs/backend.md#-controller-productcontroller)
-* [🎮 Controller UsuarioController](./docs/backend.md#-controller-usuariocontroller)
-* [🛠️ Service ProductService](./docs/backend.md#-service-productservice)
-* [🛠️ Service UsuarioService](./docs/backend.md#-service-usuarioservice)
-* [=== Suas novas seções de rotas e middlewares compiladas anteriormente ===]
+* [📦 Model Product](./README-GUIDE.md#model-product)
+* [📦 Model Usuario](./README-GUIDE.md#model-usuario)
+* [🎮 Controller ProductController](./README-GUIDE.md#controller-productcontroller)
+* [🎮 Controller UsuarioController](./README-GUIDE.md#controller-usuariocontroller)
+* [🛠️ Service ProductService](./README-GUIDE.md#service-productservice)
+* [🛠️ Service UsuarioService](./README-GUIDE.md#service-usuarioservice)
+* [🛣️ Rotas de Produtos](./README-GUIDE.md#rotas-produtos)
+* [🛣️ Rotas de Usuários](./README-GUIDE.md#rotas-usuarios)
+* [🛡️ Middleware authMiddleware](./README-GUIDE.md#middleware-auth)
+* [🗄️ Conexão com o Banco de Dados (Pool)](./README-GUIDE.md#pool-banco)
+* [🌐 Configuração do Aplicativo (App)](./README-GUIDE.md#config-app)
+* [🚀 Inicialização do Servidor (Server)](./README-GUIDE.md#init-server)
