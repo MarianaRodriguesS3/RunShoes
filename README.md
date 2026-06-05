@@ -35,11 +35,11 @@ Clique nos tópicos abaixo para visualizar os detalhes de cada módulo do sistem
 ### 🎨 Frontend - Componentes e Páginas
 
 
-* [🏠 Página Home](README-guide.md#-pagina-home)
-* [🧭 Componente Header](README-guide.md#-componente-header)
-* [🛒 Página Carrinho (Cart)](README-guide.md#-pagina-carrinho-cart)
-* [🔐 Página Login](README-guide.md#-pagina-login)
-* [🎯 Componente Banner](README-guide.md#-componente-banner)
+* [🏠 Página Home](./README-GUIDE.md#home)
+* [🧭 Componente Header](./README-GUIDE.md#header)
+* [🛒 Página Carrinho (Cart)](./README-GUIDE.md#cart)
+* [🔐 Página Login](./README-GUIDE.md#login)
+* [🎯 Componente Banner](./README-GUIDE.md#banner)
 
 
 
