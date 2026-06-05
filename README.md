@@ -32,9 +32,7 @@ Camada de persistência relacional robusta hospedada em nuvem na plataforma **Re
 
 Clique nos tópicos abaixo para visualizar os detalhes de cada módulo do sistema:
 
-
-
-### 🎨 Frontend - Componentes e Páginas
+### [🎨 Frontend - Componentes e Páginas](./README-GUIDE.md#secao-frontend)
 * [🏠 Página Home](./README-GUIDE.md#home)
 * [🧭 Componente Header](./README-GUIDE.md#header)
 * [🛒 Página Carrinho (Cart)](./README-GUIDE.md#cart)
@@ -57,7 +55,7 @@ Clique nos tópicos abaixo para visualizar os detalhes de cada módulo do sistem
 * [🔐 Página ResetPassword](./README-GUIDE.md#resetpassword)
 * [🎴 Componente Footer](./README-GUIDE.md#footer)
 
-### 📦 Backend - Camadas da API
+### [📦 Backend - Camadas da API](./README-GUIDE.md#secao-backend)
 * [📦 Model Product](./README-GUIDE.md#model-product)
 * [📦 Model Usuario](./README-GUIDE.md#model-usuario)
 * [🎮 Controller ProductController](./README-GUIDE.md#controller-productcontroller)
