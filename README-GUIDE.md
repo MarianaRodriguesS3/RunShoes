@@ -1,4 +1,4 @@
-### Funcionalidades Frontend
+<a name="secao-frontend"></a>### Funcionalidades Frontend
 
 ## <a name="home"></a>🏠 Página Home
 
@@ -90,7 +90,7 @@ Tem como objetivo tornar a interface inicial mais atrativa e acolhedora para o u
 
 ---
 
-## 📦 Componente ProductList
+## <a name="productlist"></a>📦 Componente ProductList
 
 O ProductList é responsável por renderizar a lista de produtos da aplicação, recebendo os dados via props e utilizando o componente ProductCard para exibir cada item.
 
@@ -109,7 +109,7 @@ O componente centraliza a exibição dos produtos, garantindo uma listagem dinâ
 
 ---
 
-## 🛍️ Componente ProductCard
+## <a name="productcard"></a>🛍️ Componente ProductCard
 
 O ProductCard exibe as informações de um produto e permite que o usuário selecione um tamanho, adicione o item ao carrinho ou realize a compra diretamente.
 
@@ -138,7 +138,7 @@ O componente centraliza as principais interações de compra da aplicação, pro
 
 ---
 
-##🛒 Contexto CartContext
+## <a name="cartcontext"></a>🛒 Contexto CartContext
 
 O CartContext é responsável por gerenciar o estado global do carrinho e da sessão do usuário, compartilhando dados e funcionalidades entre todos os componentes da aplicação por meio da Context API.
 
@@ -163,7 +163,7 @@ O contexto centraliza toda a lógica de gerenciamento do carrinho e da sessão d
 
 ---
 
-## 🔔 Componente CartMessage
+## <a name="cartmessage"></a>🔔 Componente CartMessage
 
 O CartMessage exibe uma notificação temporária sempre que um produto é adicionado ao carrinho, fornecendo feedback visual imediato ao usuário.
 
@@ -188,7 +188,7 @@ O componente melhora a experiência do usuário ao fornecer uma confirmação vi
 
 ---
 
-## 💳 Página Checkout
+## <a name="checkout"></a>💳 Página Checkout
 
 A página Checkout exibe os detalhes do produto selecionado e permite ao usuário configurar a compra antes da finalização.
 
@@ -213,7 +213,7 @@ A página prepara e valida os dados da compra, garantindo uma experiência organ
 
 ---
 
-## 🧾 Página FinalizarCompra
+## <a name="finalizarcompra"></a>🧾 Página FinalizarCompra
 
 A página FinalizarCompra conclui o processo de compra, exibindo os produtos selecionados, coletando os dados do cliente e permitindo a escolha da forma de pagamento.
 
@@ -241,7 +241,7 @@ A página centraliza a etapa final do fluxo de compra, reunindo informações do
 
 ---
 
-## 🔘 Componente BtnFinalizarCompra
+## <a name="btnfinalizarcompra"></a>🔘 Componente BtnFinalizarCompra
 
 O BtnFinalizarCompra é um componente reutilizável utilizado para executar ações de finalização de compra em diferentes etapas da aplicação.
 
@@ -258,7 +258,7 @@ O componente padroniza os botões de finalização da aplicação, garantindo co
 
 ---
 
-## 📦 Página StatusPedido
+## <a name="statuspedido"></a>📦 Página StatusPedido
 
 A página StatusPedido exibe o progresso em tempo real do rastreamento de um pedido, além de listar recomendações de produtos para o usuário.
 
@@ -283,7 +283,7 @@ A página StatusPedido exibe o progresso em tempo real do rastreamento de um ped
 
 ---
 
-## 💰 Componente AbaPix
+## <a name="abapix"></a>💰 Componente AbaPix
 
 O AbaPix exibe as opções de pagamento via Pix ou Boleto na finalização da compra, alternando o conteúdo conforme o tipo de pagamento selecionado.
 
@@ -302,7 +302,7 @@ Oferece uma interface simples e direta para métodos de pagamento alternativos, 
 
 ---
 
-## 💳 Componente AbaCartao
+## <a name="abacartao"></a>💳 Componente AbaCartao
 
 O AbaCartao exibe e gerencia o formulário de pagamento com cartão de crédito na finalização da compra.
 
@@ -336,7 +336,7 @@ Oferece uma experiência segura, validada e interativa para pagamentos com cart�
 
 ---
 
-## 🎴 Componente AnimacaoCartao
+## <a name="animacaocartao"></a>🎴 Componente AnimacaoCartao
 
 O AnimacaoCartao exibe uma animação visual de um cartão de crédito, destacando a localização do CVV.
 
@@ -358,7 +358,7 @@ Fornece orientação visual clara e melhora a experiência do usuário no preenc
 
 ---
 
-## 📝 Página de Cadastro
+## <a name="cadastro"></a>📝 Página de Cadastro
 
 A página Cadastro permite que novos usuários criem uma conta, preenchendo informações pessoais, login e endereço.
 
@@ -396,7 +396,7 @@ A página centraliza o processo de criação de conta, garantindo validação, i
 
 ---
 
-## ✏️ Página EditarCadastro
+## <a name="editarcadastro"></a>✏️ Página EditarCadastro
 
 A página EditarCadastro permite que o usuário logado atualize seus dados pessoais, credenciais de login e endereço.
 
@@ -432,7 +432,7 @@ A página simplifica a manutenção da conta do usuário, unindo validações de
 
 ---
 
-## 🔑 Página ForgotPassword
+## <a name="forgotpassword"></a>🔑 Página ForgotPassword
 
 A página ForgotPassword permite que o usuário inicie o processo de recuperação de conta validando o seu email cadastrado.
 
@@ -457,7 +457,7 @@ A página ForgotPassword permite que o usuário inicie o processo de recuperaç�
 A página oferece uma porta de entrada segura para a recuperação de credenciais, validando a existência da conta antes de liberar o fluxo de edição de dados.
 ---
 
-## 🔐 Página ResetPassword
+## <a name="resetpassword"></a>🔐 Página ResetPassword
 
 A página ResetPassword permite que o usuário crie uma nova credencial de acesso utilizando um token de recuperação enviado via URL.
 
@@ -482,7 +482,7 @@ A página conclui o fluxo de recuperação de conta de forma objetiva, garantind
 
 ---
 
-## 🎴 Componente Footer
+## <a name="footer"></a>🎴 Componente Footer
 
 O Footer disponibiliza o rodapé global da aplicação, agregando a identidade visual da marca, links rápidos para a navegação do site e pontos de contato da desenvolvedora.
 
@@ -506,11 +506,11 @@ O componente fecha o layout do ecossistema Run Shoes, auxiliando a navegação f
 
 ---
 
-### Funcionalidades Backend
+<a name="secao-backend"></a>### Funcionalidades Backend
 
 ### Model
 
-## 📦 Model Product
+## <a name="model-product"></a>📦 Model Product
 
 O model Product define a estrutura de dados e as regras de negócio para os produtos do e-commerce (como tênis e calçados) no ecossistema do backend.
 
@@ -539,7 +539,7 @@ O modelo assegura a consistência e a segurança dos dados dos produtos antes de
 
 ---
 
-## 📦 Model Usuario
+## <a name="model-usuario"></a>📦 Model Usuario
 
 O model Usuario estrutura os dados e as regras de negócio associados aos clientes da aplicação, centralizando o encapsulamento de informações sensíveis e a segurança de credenciais.
 
@@ -573,7 +573,7 @@ O modelo garante o cumprimento de boas práticas de segurança (OWASP), blindand
 
 ### Controller
 
-## 🎮 Controller ProductController
+## <a name="controller-productcontroller"></a>🎮 Controller ProductController
 
 O ProductController gerencia as requisições HTTP da API relacionadas aos produtos, atuando como intermediário entre as rotas de entrada e a camada de serviços (`ProductService`).
 
@@ -605,7 +605,7 @@ O controlador padroniza as respostas de API para o gerenciamento de produtos, ap
 
 ---
 
-## 🎮 Controller UsuarioController
+## <a name="controller-usuariocontroller"></a>🎮 Controller UsuarioController
 
 O UsuarioController centraliza as regras de orquestração HTTP para gerenciamento de usuários, fluxos de autenticação (JWT), gerenciamento de cartões e finalização de compras.
 
@@ -646,7 +646,7 @@ O controlador funciona como o núcleo operacional de segurança e transações d
 
 ### Service
 
-## 🛠️ Service ProductService
+## <a name="service-productservice"></a>🛠️ Service ProductService
 
 O ProductService é responsável pela lógica de persistência e manipulação direta dos dados de produtos no banco de dados PostgreSQL.
 
@@ -680,7 +680,7 @@ O serviço isola a sintaxe e a comunicação SQL do restante da aplicação, ass
 
 ---
 
-## 🛠️ Service UsuarioService
+## <a name="service-usuarioservice"></a>🛠️ Service UsuarioService
 
 O UsuarioService centraliza as regras de negócio complexas do sistema de usuários, abrangendo desde autenticação e criptografia até a geração de dados simulados (*mock*) para testes e preenchimento ágil.
 
@@ -713,7 +713,7 @@ O serviço funciona como o motor de regras da aplicação de usuários, isolando
 
 ### Rotas
 
-## 🛣️ Rotas de Produtos
+## <a name="rotas-produtos"></a>🛣️ Rotas de Produtos
 
 O arquivo de rotas de produtos define os pontos de entrada (endpoints) da API para o gerenciamento do catálogo, mapeando as requisições HTTP para as ações do `ProductController`.
 
@@ -742,7 +742,7 @@ Este arquivo organiza a exposição do catálogo de produtos para o frontend, ma
 
 ---
 
-## 🛣️ Rotas de Usuários
+## <a name="rotas-usuarios"></a>🛣️ Rotas de Usuários
 
 O arquivo de rotas de usuários estabelece os pontos de entrada (endpoints) da API para autenticação, gerenciamento de perfis cadastrais e operações transacionais de checkout.
 
@@ -776,7 +776,7 @@ Este arquivo consolida a porta de entrada para toda a inteligência de negócios
 
 ---
 
-## 🛡️ Middleware authMiddleware
+## <a name="middleware-auth"></a>🛡️ Middleware authMiddleware
 
 O authMiddleware atua como uma camada de segurança intermediária (filtro) que intercepta as requisições HTTP para validar os tokens de autenticação antes de liberar o acesso a rotas privadas.
 
@@ -803,7 +803,7 @@ O middleware garante o isolamento e a proteção das informações da API, certi
 
 ---
 
-## 🗄️ Conexão com o Banco de Dados (Pool)
+## <a name="pool-banco"></a>🗄️ Conexão com o Banco de Dados (Pool)
 
 O arquivo de conexão configura e estabelece o gerenciamento de conexões com o banco de dados relacional PostgreSQL, servindo como a fundação de persistência para toda a API.
 
@@ -834,7 +834,7 @@ A configuração blinda as credenciais do banco para que não fiquem expostas no
 
 ---
 
-## 🌐 Configuração do Aplicativo (App)
+## <a name="config-app"></a>🌐 Configuração do Aplicativo (App)
 
 O arquivo de configuração do aplicativo inicializa o framework Express, aplica os middlewares globais de segurança e tráfego, expõe arquivos estáticos e centraliza o roteamento principal da API.
 
@@ -866,7 +866,7 @@ Este arquivo estabelece as regras de tráfego de rede e segurança da API, garan
 
 ---
 
-## 🚀 Inicialização do Servidor (Server)
+## <a name="init-server"></a>🚀 Inicialização do Servidor (Server)
 
 O arquivo de inicialização é o ponto de entrada principal (*entry point*) do backend. Ele é responsável por colocar o servidor Express em execução e disparar a conexão assíncrona com o banco de dados.
 
