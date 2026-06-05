@@ -1,6 +1,6 @@
 ### Funcionalidades Frontend
 
-## 🏠 Página Home
+## <a name="home"></a>🏠 Página Home
 
 A página inicial é responsável por buscar e exibir os produtos disponíveis. Ao ser carregada, faz uma requisição à API (/api/products), armazenando os dados no estado com useState, enquanto o useEffect garante que a busca ocorra apenas na primeira renderização. Em caso de erro, uma mensagem é exibida no console.
 
@@ -12,7 +12,7 @@ Essa página funciona como porta de entrada da aplicação, exibindo os produtos
 
 ---
 
-## 🧭 Componente Header
+## <a name="header"></a>🧭 Componente Header
 
 O Header gerencia a navegação principal da aplicação, oferecendo acesso à Home, carrinho e área do usuário.
 
@@ -28,7 +28,7 @@ O componente centraliza a navegação e o gerenciamento da autenticação, contr
 
 ---
 
-## 🛒 Página Carrinho (Cart)
+## <a name="cart"></a>🛒 Página Carrinho (Cart)
 
 A página Cart exibe e gerencia os produtos adicionados ao carrinho, permitindo ao usuário revisar e finalizar suas compras.
 
@@ -50,7 +50,7 @@ O componente centraliza toda a gestão do carrinho, proporcionando uma experiên
 
 ---
 
-## 🔐 Página Login
+## <a name="login"></a>🔐 Página Login
 
 A página Login autentica o usuário, permitindo acesso a funcionalidades protegidas da aplicação, como o carrinho de compras.
 
@@ -76,7 +76,7 @@ A página é essencial para o controle de acesso e personalização da experiên
 
 ---
 
-## 🎯 Componente Banner
+## <a name="banner"></a>🎯 Componente Banner
 
 O Banner exibe uma seção de destaque na página inicial, apresentando a identidade visual da aplicação e incentivando a exploração dos produtos.
 
